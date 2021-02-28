@@ -1,0 +1,62 @@
+.tableHeader {
+    background-color: rgba(23, 103, 162, 0.5);
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.even {
+    background-color: rgba(23, 103, 162, 0.1);
+}
+
+.timeTable01 {
+    float: left;
+    border-collapse: collapse;
+    border-width: 2px;
+}
+
+.timeTable02 {
+    border-left: none;
+}
+
+.timeTable01 td {
+    height: 50px;
+    width: 105px;
+}
+
+.tablebody {
+    font-size: 10px;
+}
+
+.timeTableInfo {
+    margin-top: 10px;
+    float: right;
+    width: 541px;
+}
+
+.timeTableHeader {
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Microsoft YaHei UI";
+    background-color: rgba(32, 102, 154, 0.8);
+    font-weight: bold;
+    color: white;
+}
+
+.more {
+    float: right;
+}
+
+.coursename {
+    width: 105px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: none;
+    box-sizing: border-box;
+}

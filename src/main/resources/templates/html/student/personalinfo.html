@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统-学生：[[${student.name}]]</title>
+    <link rel="shortcut icon" th:href="@{/img/logo.ico}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/student/personInfo.css}">
+</head>
+
+<style>
+
+    .footer {
+        position: absolute;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 9;
+        height: 80px;
+        bottom: 0;
+    }
+
+</style>
+
+<body>
+
+<div class="header">
+    <span class="hello01">学生信息管理系统</span>
+    <span class="hello02">[[${student.name}]]同学，欢迎您！</span>
+    <a th:href="@{~/logout}" style="color: white"><span class="exit">退出登录</span></a>
+    <span class="changePassword"><a th:href="@{~/student/changepwd.html(studentId=${student.id})}" style="color: white">修改密码</a></span>
+</div>
+
+
+<div class="main">
+
+    <div class="clazz" style="margin-bottom: 10px">
+        <h2>您的班级</h2>
+        <ul>
+            <li>
+                [[${clazz.name}]]
+            </li>
+        </ul>
+    </div>
+
+
+    <!--    个人信息-->
+    <div class="personalInfo">
+        <table class="personalTable" border="1">
+            <tr align="center" class="tableHeader">
+                <td>项目</td>
+                <td>内容</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">学号</td>
+                <td class="content">[[${student.id}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">姓名</td>
+                <td class="content">[[${student.name}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">性别</td>
+                <td class="content">
+                    <span th:if="${student.sex} == 1">男</span>
+                    <span th:if="${student.sex} == 0">女</span>
+                </td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">生日</td>
+                <td class="content">[[${student.birthday}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">手机号</td>
+                <td class="content">[[${student.mobile}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">邮箱</td>
+                <td class="content">[[${student.email}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">家庭住址</td>
+                <td class="content homeAddress" th:title="${student.homeAddress}">[[${student.homeAddress}]]</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <a th:href="@{~/student/updatepersonalinfo.html(studentId=${student.id})}">
+        <button class="buttonA" type="submit">重新修改</button>
+    </a>
+    <a th:href="@{~/student/index.html(studentId=${student.id})}">
+        <button class="buttonB" type="submit">返回首页</button>
+    </a>
+
+</div>
+<footer class="footer">
+    <div>
+        <p style="float: left">&copy; <a href="https://blog.csdn.net/weixin_46192593" target="_blank" style="color: black;text-decoration: none;">blog.csdn.net/weixin_46192593</a> 2020</p>
+        <p style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{~/about/zhinushannan.html}" target="_blank">关于我们</a></p>
+        <p style="float: right">
+            Powered by 治怒善男
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

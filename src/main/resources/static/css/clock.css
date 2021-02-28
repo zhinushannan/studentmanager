@@ -1,0 +1,25 @@
+.clock {
+    position: absolute;
+    top: 50%;
+    margin-top: -150px;
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    height: 300px;
+    font-size: 30px;
+    color: rgba(255,255,255,1);
+    border-radius: 10px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.clock p {
+    display: block;
+    height: 70px;
+    line-height: 50px;
+    margin: 0;
+}
+
+#day {
+    margin-top: 50px;
+}

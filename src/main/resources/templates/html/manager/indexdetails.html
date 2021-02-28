@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统-辅导员：[[${manager.name}]]</title>
+    <link rel="shortcut icon" th:href="@{/img/logo.ico}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/manager/studentInfoBrief.css}">
+    <link rel="stylesheet" th:href="@{/css/manager/timeTableInfoBrief.css}">
+</head>
+
+<style>
+
+
+    .footer {
+        position: absolute;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 9;
+        height: 80px;
+        bottom: 0;
+    }
+
+</style>
+
+<body>
+    <div class="header">
+    <span class="hello01">学生信息管理系统</span>
+    <span class="hello02">[[${manager.name}]]老师，欢迎您！</span>
+        <a th:href="@{~/logout}" style="color: white"><span class="exit">退出登录</span></a>
+        <span class="changePassword"><a th:href="@{~/manager/changepwd.html(managerId=${manager.id})}" style="color: white">修改密码</a></span>
+</div>
+
+    <div class="main">
+        <!--    班级信息-->
+        <div class="clazz">
+            <h2>您的班级</h2>
+            <ul th:each="clazz:${clazzes}">
+                <a th:href="@{~/manager/details(managerId=${clazz.managerId}, clazzId=${clazz.id})}">
+                    <li>
+                        [[${clazz.name}]]
+                    </li>
+                </a>
+            </ul>
+        </div>
+
+        <!--    学生信息-->
+        <div class="studentInfo">
+            <div class="studentTableHeader">
+                <span>[[${clazz.name}]]学生信息</span>
+                <a th:href="@{~/manager/studentinfo(clazzId=${clazz.id})}" class="whiteA"><span
+                        class="more">更多</span></a>
+            </div>
+            <table class="studentTable01" border="1" width=175px align="center">
+                <tr align="center" class="tableHeader">
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>状态</td>
+                </tr>
+                <tr th:each="student,it:${students}" th:if="${it.index} < 20" align="center"
+                    th:classappend="${it.even} ? 'even':''">
+                    <td class="studentId">[[${student.id}]]</td>
+                    <td class="StudentName">[[${student.name}]]</td>
+                    <td class="studentStatus">
+                        <span th:if="${student.status} == 1" style="color: black">正常</span>
+                        <span th:if="${student.status} == 2" style="color: orange">请假中</span>
+                        <span th:if="${student.status} == 3" style="color: red">休学中</span>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="studentTable02" border="1" width=175px align="center">
+                <tr align="center" class="tableHeader">
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>状态</td>
+                </tr>
+                <tr th:each="student,it:${students}" th:if="${it.index} >= 20 and ${it.index < 40}" align="center"
+                    th:classappend="${it.even} ? 'even':''">
+                    <td class="studentId">[[${student.id}]]</td>
+                    <td class="studentName">[[${student.name}]]</td>
+                    <td class="studentStatus">
+                        <span th:if="${student.status} == 1" style="color: black">正常</span>
+                        <span th:if="${student.status} == 2" style="color: orange">请假中</span>
+                        <span th:if="${student.status} == 3" style="color: red">休学中</span>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="studentTable03" border="1" width=175px align="center">
+                <tr align="center" class="tableHeader">
+                    <td>学号</td>
+                    <td>姓名</td>
+                    <td>状态</td>
+                </tr>
+                <tr th:each="student,it:${students}" th:if="${it.index} >= 40 and ${it.index < 60}" align="center"
+                    th:classappend="${it.even} ? 'even':''">
+                    <td class="studentId">[[${student.id}]]</td>
+                    <td class="studentName">[[${student.name}]]</td>
+                    <td class="studentStatus">
+                        <span th:if="${student.status} == 1" style="color: black">正常</span>
+                        <span th:if="${student.status} == 2" style="color: orange">请假中</span>
+                        <span th:if="${student.status} == 3" style="color: red">休学中</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--    课表信息-->
+        <div class="timeTableInfo">
+            <div class="timeTableHeader">
+                <span>[[${clazz.name}]]课表</span>
+                <a th:href="@{~/manager/timetableinfo(clazzId=${clazz.id})}" class="whiteA">
+                    <span class="more">更多</span>
+                </a>
+
+            </div>
+            <table class="timeTable01" border="1">
+                <tr align="center" class="tableHeader">
+                    <td style="height: 30px">周一</td>
+                </tr>
+                <tr th:each="timetable,it:${timeTables}" align="center" class="tablebody">
+                    <td th:if="${it.index} < 4">
+                        <span th:if="${timetable.courseName} == '无'"></span>
+                        <span th:if="${timetable.courseName} != '无'">[[${timetable.courseName}]]</span>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="timeTable01 timeTable02" border="1">
+                <tr align="center" class="tableHeader">
+                    <td style="height: 30px">周二</td>
+                </tr>
+                <tr th:each="timetable,it:${timeTables}" align="center" class="tablebody">
+                    <td th:if="${it.index} >= 4 and ${it.index} < 8">
+                        <span th:if="${timetable.courseName} == '无'"></span>
+                        <span th:if="${timetable.courseName} != '无'">[[${timetable.courseName}]]</span>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table class="timeTable01 timeTable02" border="1">
+                <tr align="center" class="tableHeader">
+                    <td style="height: 30px">周三</td>
+                </tr>
+                <tr th:each="timetable,it:${timeTables}" align="center" class="tablebody">
+                    <td th:if="${it.index} >= 8 and ${it.index} < 12">
+                        <span th:if="${timetable.courseName} == '无'"></span>
+                        <span th:if="${timetable.courseName} != '无'">[[${timetable.courseName}]]</span>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table class="timeTable01 timeTable02" border="1">
+                <tr align="center" class="tableHeader">
+                    <td style="height: 30px">周四</td>
+                </tr>
+                <tr th:each="timetable,it:${timeTables}" align="center" class="tablebody">
+                    <td th:if="${it.index} >= 12 and ${it.index} < 16">
+                        <span th:if="${timetable.courseName} == '无'"></span>
+                        <span th:if="${timetable.courseName} != '无'">[[${timetable.courseName}]]</span>
+                    </td>
+                </tr>
+            </table>
+
+
+            <table class="timeTable01 timeTable02" border="1">
+                <tr align="center" class="tableHeader">
+                    <td style="height: 30px">周五</td>
+                </tr>
+                <tr th:each="timetable,it:${timeTables}" align="center" class="tablebody">
+                    <td th:if="${it.index} >= 16 and ${it.index} < 20">
+                        <span th:if="${timetable.courseName} == '无'"></span>
+                        <span th:if="${timetable.courseName} != '无'">[[${timetable.courseName}]]</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div>
+            <p style="float: left">&copy; <a href="https://blog.csdn.net/weixin_46192593" target="_blank" style="color: black;text-decoration: none;">blog.csdn.net/weixin_46192593</a> 2020</p>
+            <p style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{~/about/zhinushannan.html}" target="_blank">关于我们</a></p>
+            <p style="float: right">
+                Powered by 治怒善男
+            </p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

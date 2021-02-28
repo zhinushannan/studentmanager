@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统：登录界面</title>
+    <link rel="shortcut icon" th:href="@{/img/logo.ico}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/clock.css}">
+</head>
+
+<style>
+
+    .header {
+        position: absolute;
+        z-index: 9;
+    }
+
+
+    .back {
+        width: 100%;
+        height: 100%;
+        background-position-y: -40px;
+    }
+
+
+
+    .forgetPassword {
+        display: block;
+        color: black;
+        font-size: 10px;
+        margin-left: 50px;
+    }
+
+    .clock {
+        height: 100%;
+        top: 0;
+        margin-top: 0;
+        margin-left: 0;
+        border: none;
+        padding-top: 200px;
+        box-sizing: border-box;
+    }
+
+
+</style>
+
+
+<body>
+
+<div class="header">
+    <span class="hello01">学生信息管理系统</span>
+    <span class="hello02">您好，请登录！</span>
+</div>
+
+<div class="loginBox">
+
+    <img th:src="@{/img/kwxyback.jpg}" class="back">
+
+    <div class="login">
+        <form action="/authenticate" method="post">
+            <div class="title">登&nbsp;&nbsp;&nbsp;&nbsp;录</div>
+            <input type="text" placeholder="学号/工号/教师编号" name="id">
+            <input type="password" placeholder="密码" name="password">
+            <select name="type">
+                <option value="">请选择您的身份</option>
+                <option value="student">学生</option>
+                <option value="manager">辅导员</option>
+                <option value="teacher">任课教师</option>
+            </select>
+            <button class="loginButton" type="submit">登录</button>
+        </form>
+    </div>
+
+    <div class="clock">
+        <p id="day"></p>
+        <p id="week"></p>
+        <p id="time"></p>
+    </div>
+
+    <div class="loginFooter">
+        <p style="float: left">&copy; <a href="https://blog.csdn.net/weixin_46192593" target="_blank"
+                                         style="color: rgba(255, 255, 255, 0.2);text-decoration: none;">blog.csdn.net/weixin_46192593</a>
+            2020</p>
+        <p style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{~/about/zhinushannan.html}" target="_blank"
+                                                          style="color: rgba(255, 255, 255, 0.2)">关于我们</a></p>
+        <p style="float: left; margin-left: 10px">
+            Powered by 治怒善男
+        </p>
+    </div>
+
+</div>
+</body>
+
+<script th:inline="javascript">
+
+    function getTime() {
+        var date = new Date()
+        var day = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" +
+            date.getDate() + "日"
+        var time = check(date.getHours()) + " : " + check(date.getMinutes()) + " : " + check(date.getSeconds())
+
+        document.getElementById("day").innerText = day
+        weekArray = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+        document.getElementById("week").innerText = weekArray[date.getDay()]
+        document.getElementById("time").innerText = time
+    }
+
+    window.onload = function () {
+        msg = [[${msg}]]
+        if (msg) {
+            alert(msg)
+        }
+        getTime()
+        window.setInterval("getTime()", 1000)
+    }
+
+    function check(val){
+        if(val < 10){
+            return("0" + val)
+        }else{
+            return(val)
+        }
+    }
+
+
+
+
+
+</script>
+
+</html>

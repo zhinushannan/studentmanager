@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统-学生：[[${student.name}]]</title>
+    <link rel="shortcut icon" th:href="@{/img/logo.ico}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+</head>
+<style>
+
+    .footer {
+        position: absolute;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 9;
+        height: 80px;
+        bottom: 0;
+    }
+
+    .clazz {
+        margin-bottom: 10px;
+    }
+
+    .timeTable01 td {
+        height: 50px;
+        width: 105px;
+    }
+
+    .tableHeader {
+        background-color: rgba(23, 103, 162, 0.5);
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .personalTable {
+        float: left;
+        border-collapse: collapse;
+        border-width: 2px;
+        margin-right: 10px;
+    }
+
+    .tableHeader {
+        background-color: rgba(23, 103, 162, 0.5);
+        height: 30px;
+        line-height: 30px;
+        font-weight: bold;
+        font-size: 14px;
+        color: white;
+    }
+
+    .infoItem {
+        font-size: 16px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .timeTableInfo {
+        float: left;
+        width: 900px;
+        background-color: white;
+    }
+
+    .timeTableHeader, .tableHeader {
+        font-family: "Microsoft YaHei UI";
+        font-size: 16px;
+        text-align: center;
+        height: 40px;
+        font-weight: bold;
+        line-height: 40px;
+        background-color: rgba(23, 103, 162, 0.8);
+        color: white;
+    }
+
+    .timeTable01 {
+        width: 180px;
+        float: left;
+        border-collapse: collapse;
+        border-width: 2px;
+        font-size: 16px;
+    }
+
+    .timeTable02 {
+        border-left: none;
+    }
+
+    .tablebody {
+        height: 100px;
+    }
+
+    .personalInfo {
+        float: right;
+    }
+
+    .tabletitle {
+        background-color: rgba(23, 103, 162, 0.3);
+        height: 20px;
+        line-height: 20px;
+        font-weight: bold;
+        font-size: 14px;
+        color: black;
+    }
+
+    .program {
+        width: 80px;
+    }
+
+    .content {
+        width: 260px;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        height: 30px;
+    }
+
+    .homeAddress {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        border: none;
+    }
+
+</style>
+
+<body>
+
+
+<div class="header">
+    <span class="hello01">学生信息管理系统</span>
+    <span class="hello02">[[${student.name}]]同学，欢迎您！</span>
+    <a th:href="@{~/logout}" style="color: white"><span class="exit">退出登录</span></a>
+    <span class="changePassword"><a th:href="@{~/student/changepwd.html(studentId=${student.id})}" style="color: white">修改密码</a></span>
+</div>
+
+
+<div class="main">
+
+
+    <!--    班级信息-->
+    <div class="clazz">
+        <h2>您的班级</h2>
+        <ul>
+            <li>
+                [[${clazz.name}]]
+            </li>
+        </ul>
+    </div>
+
+    <!--课表信息-->
+    <div class="timeTableInfo">
+        <div class="timeTableHeader">
+            <span>[[${clazz.name}]]班课程表</span>
+        </div>
+        <table class="timeTable01" border="1">
+            <tr align="center" class="tabletitle">
+                <td style="height: 30px">周一</td>
+            </tr>
+            <tr th:each="timetable,it:${timeTableDetails}" th:if="${it.index} < 4" align="center" class="tablebody">
+                <td>
+                    <span th:if="${timetable.clazzName} == '无'"></span>
+                    <span th:if="${timetable.clazzName} != '无'">
+                        <p>[[${timetable.courseName}]]</p>
+                        <p>[[${timetable.teacherName}]]</p>
+                        <p>[[${timetable.room}]]</p>
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+        <table class="timeTable01 timeTable02" border="1">
+            <tr align="center" class="tabletitle">
+                <td style="height: 30px">周二</td>
+            </tr>
+            <tr th:each="timetable,it:${timeTableDetails}" th:if="${it.index} >= 4 and ${it.index} < 8" align="center"
+                class="tablebody">
+                <td>
+                    <span th:if="${timetable.clazzName} == '无'"></span>
+                    <span th:if="${timetable.clazzName} != '无'">
+                        <p>[[${timetable.courseName}]]</p>
+                        <p>[[${timetable.teacherName}]]</p>
+                        <p>[[${timetable.room}]]</p>
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+
+        <table class="timeTable01 timeTable02" border="1">
+            <tr align="center" class="tabletitle">
+                <td style="height: 30px">周三</td>
+            </tr>
+            <tr th:each="timetable,it:${timeTableDetails}" th:if="${it.index} >= 8 and ${it.index} < 12" align="center"
+                class="tablebody">
+                <td>
+                    <span th:if="${timetable.clazzName} == '无'"></span>
+                    <span th:if="${timetable.clazzName} != '无'">
+                        <p>[[${timetable.courseName}]]</p>
+                        <p>[[${timetable.teacherName}]]</p>
+                        <p>[[${timetable.room}]]</p>
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+
+        <table class="timeTable01 timeTable02" border="1">
+            <tr align="center" class="tabletitle">
+                <td style="height: 30px">周四</td>
+            </tr>
+            <tr th:each="timetable,it:${timeTableDetails}" th:if="${it.index} >= 12 and ${it.index} < 16" align="center"
+                class="tablebody">
+                <td>
+                    <span th:if="${timetable.clazzName} == '无'"></span>
+                    <span th:if="${timetable.clazzName} != '无'">
+                        <p>[[${timetable.courseName}]]</p>
+                        <p>[[${timetable.teacherName}]]</p>
+                        <p>[[${timetable.room}]]</p>
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+
+        <table class="timeTable01 timeTable02" border="1">
+            <tr align="center" class="tabletitle">
+                <td style="height: 30px">周五</td>
+            </tr>
+            <tr th:each="timetable,it:${timeTableDetails}" th:if="${it.index} >= 16 and ${it.index} < 20" align="center"
+                class="tablebody">
+                <td>
+                    <span th:if="${timetable.clazzName} == '无'"></span>
+                    <span th:if="${timetable.clazzName} != '无'">
+                        <p>[[${timetable.courseName}]]</p>
+                        <p>[[${timetable.teacherName}]]</p>
+                        <p>[[${timetable.room}]]</p>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!--    个人信息-->
+    <div class="personalInfo">
+        <table class="personalTable" border="1">
+            <tr align="center" class="tableHeader">
+                <td>项目</td>
+                <td>内容</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">学号</td>
+                <td class="content">[[${student.id}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">姓名</td>
+                <td class="content">[[${student.name}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">性别</td>
+                <td class="content">
+                    <span th:if="${student.sex} == 1">男</span>
+                    <span th:if="${student.sex} == 0">女</span>
+                </td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">生日</td>
+                <td class="content">[[${student.birthday}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">手机号</td>
+                <td class="content">[[${student.mobile}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">邮箱</td>
+                <td class="content">[[${student.email}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">家庭住址</td>
+                <td class="content homeAddress" th:title="${student.homeAddress}">[[${student.homeAddress}]]</td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">状态</td>
+                <td class="content">
+                    <span th:if="${student.status} == 1" style="color: black">正常</span>
+                    <span th:if="${student.status} == 2" style="color: orange">请假中</span>
+                    <span th:if="${student.status} == 3" style="color: red">休学中</span>
+                </td>
+            </tr>
+            <tr align="center" class="infoItem">
+                <td class="program">其他</td>
+                <td class="content">
+                    <a th:href="@{~/student/updatepersonalinfo.html(studentId=${student.id})}">
+                        <span style="color: black">更改信息</span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div>
+        <p style="float: left">&copy; <a href="https://blog.csdn.net/weixin_46192593" target="_blank" style="color: black;text-decoration: none;">blog.csdn.net/weixin_46192593</a> 2020</p>
+        <p style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{~/about/zhinushannan.html}" target="_blank">关于我们</a></p>
+        <p style="float: right">
+            Powered by 治怒善男
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

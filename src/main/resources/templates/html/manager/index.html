@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统-辅导员：[[${manager.name}]]</title>
+    <link rel="shortcut icon" th:href="@{/img/logo.ico}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/clock.css}">
+</head>
+
+<style>
+
+    .header {
+        float: top;
+    }
+
+    .clazz {
+        float: top;
+    }
+
+
+    .footer {
+        margin-top: 0;
+        float: top;
+    }
+
+    img {
+        width: 100%;
+    }
+
+
+
+
+
+</style>
+
+<body>
+
+<div class="header">
+    <span class="hello01">学生信息管理系统</span>
+    <span class="hello02">[[${manager.name}]]老师，欢迎您！</span>
+    <a th:href="@{~/logout}" style="color: white"><span class="exit">退出登录</span></a>
+    <span class="changePassword"><a th:href="@{~/manager/changepwd.html(managerId=${manager.id})}" style="color: white">修改密码</a></span>
+</div>
+
+<div class="main">
+    <!--    班级信息-->
+    <div class="clazz">
+        <h2>您的班级</h2>
+        <ul th:each="clazz:${clazzes}">
+            <a th:href="@{~/manager/details(managerId=${clazz.managerId}, clazzId=${clazz.id})}">
+                <li>
+                    [[${clazz.name}]]
+                </li>
+            </a>
+        </ul>
+    </div>
+
+    <img th:src="@{/img/kwxyhome.jpg}">
+
+
+    <div class="clock">
+        <p id="day"></p>
+        <p id="week"></p>
+        <p id="time"></p>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div>
+        <p style="float: left">&copy; <a href="https://blog.csdn.net/weixin_46192593" target="_blank"
+                                         style="color: black;text-decoration: none;">blog.csdn.net/weixin_46192593</a>
+            2020</p>
+        <p style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{~/about/zhinushannan.html}"
+                                                          target="_blank">关于我们</a></p>
+        <p style="float: right">
+            Powered by 治怒善男
+        </p>
+    </div>
+</footer>
+
+</body>
+
+
+<script th:inline="javascript">
+    function getTime() {
+        var date = new Date()
+        var day = date.getFullYear() + "年" + (date.getMonth() + 1) + "月" +
+            date.getDate() + "日"
+        var time = check(date.getHours()) + " : " + check(date.getMinutes()) + " : " + check(date.getSeconds())
+
+        document.getElementById("day").innerText = day
+
+        weekArray = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+        document.getElementById("week").innerText = weekArray[date.getDay()]
+
+        document.getElementById("time").innerText = time
+    }
+
+    function check(val){
+        if(val < 10){
+            return("0" + val)
+        }else{
+            return(val)
+        }
+    }
+    window.onload = function () {
+        getTime()
+        window.setInterval("getTime()", 1000)
+    }
+</script>
+
+</html>

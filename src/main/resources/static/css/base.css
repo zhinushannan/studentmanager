@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.header {
+    width: 100%;
+    height: 40px;
+    background-color: #1767a2;
+    line-height: 40px;
+    padding-left: 100px;
+    padding-right: 100px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.header .hello01 {
+    font-family: "Microsoft YaHei UI";
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.exit {
+    float: right;
+}
+
+.changePassword {
+    float: right;
+    margin-right: 20px;
+}
+
+.main {
+    width: 100%;
+    padding-left: 100px;
+    padding-right: 100px;
+    box-sizing: border-box;
+}
+
+.clazz {
+    background-color: rgba(23, 103, 162, 0.5);
+    height: 50px;
+    line-height: 50px;
+}
+
+.clazz > h2 {
+    font-size: 20px;
+    display: inline-block;
+    width: 125px;
+    text-align: center;
+    background-color: rgba(23, 103, 162, 0.7);
+    color: white;
+    float: left;
+}
+
+.clazz ul {
+    display: inline;
+}
+
+.clazz li {
+    display: inline-block;
+    width: 125px;
+    text-align: center;
+    float: left;
+}
+
+.clazz li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+.whiteA {
+    text-decoration: none;
+    color: white;
+}

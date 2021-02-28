@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息管理系统-辅导员：[[${manager.name}]]</title>
+    <link rel="shortcut icon" th:href="@{/img/logo.ico}">
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/manager/studentInfoDetail.css}">
+</head>
+
+<body>
+
+<div class="header">
+    <span class="hello01">学生信息管理系统</span>
+    <span class="hello02">[[${manager.name}]]老师，欢迎您！</span>
+    <a th:href="@{~/logout}" style="color: white"><span class="exit">退出登录</span></a>
+    <span class="changePassword"><a th:href="@{~/manager/changepwd.html(managerId=${manager.id})}" style="color: white">修改密码</a></span>
+</div>
+
+<div class="main">
+    <!--    班级信息-->
+    <div class="clazz">
+        <h2>您的班级</h2>
+        <ul th:each="clazz:${clazzes}">
+            <a th:href="@{~/manager/studentinfo(clazzId=${clazz.id})}">
+                <li>
+                    [[${clazz.name}]]
+                </li>
+            </a>
+        </ul>
+    </div>
+
+    <!--    学生信息-->
+    <div class="studentInfo">
+        <div class="tableHeader">
+            <span>[[${clazz.name}]]班学生信息一览表</span>
+            <a th:href="@{~/manager/details(managerId=${clazz.managerId}, clazzId=${clazz.id})}" class="whiteA"><span class="back">返回</span></a>
+        </div>
+        <table class="studentInfoTable" border="1">
+            <tr align="center" class="studentInfoHeader">
+                <td style="width: 45px">序号</td>
+                <td style="width: 150px">学号</td>
+                <td style="width: 100px;">姓名</td>
+                <td style="width: 45px;">性别</td>
+                <td style="width: 130px;">生日</td>
+                <td style="width: 150px">手机号</td>
+                <td style="width: 180px;">电子邮箱</td>
+                <td>家庭住址</td>
+                <td style="width: 100px">状态</td>
+            </tr>
+            <tr th:each="stu,it:${students}" align="center" th:classappend="${it.odd} ? '':'addColor'">
+                <td>[[${it.count}]]</td>
+                <td>[[${stu.id}]]</td>
+                <td>[[${stu.name}]]</td>
+                <td>
+                    <span th:if="${stu.sex} == 1">男</span>
+                    <span th:if="${stu.sex} == 0">女</span>
+                </td>
+                <td>[[${stu.birthday}]]</td>
+                <td>[[${stu.mobile}]]</td>
+                <td>[[${stu.email}]]</td>
+                <td>[[${stu.homeAddress}]]</td>
+                <td>
+                    <span th:if="${stu.status} == 1" style="color: black">正常</span>
+                    <span th:if="${stu.status} == 2" style="color: orange">请假中</span>
+                    <span th:if="${stu.status} == 3" style="color: red">休学中</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+</div>
+
+<footer class="footer">
+    <div>
+        <p style="float: left">&copy; <a href="https://blog.csdn.net/weixin_46192593" target="_blank" style="color: black;text-decoration: none;">blog.csdn.net/weixin_46192593</a> 2020</p>
+        <p style="float:left;">&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{~/about/zhinushannan.html}" target="_blank">关于我们</a></p>
+        <p style="float: right">
+            Powered by 治怒善男
+        </p>
+    </div>
+</footer>
+
+
+</body>
+</html>

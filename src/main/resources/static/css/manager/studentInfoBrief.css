@@ -1,0 +1,62 @@
+.studentTable01, .studentTable02, .studentTable03 {
+    float: left;
+    border-collapse: collapse;
+    border-width: 2px;
+    margin-right: 10px;
+    width: 250px;
+}
+
+.studentTable03 {
+    margin-right: 0;
+}
+
+.tableHeader {
+    background-color: rgba(23, 103, 162, 0.5);
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.even {
+    background-color: rgba(23, 103, 162, 0.1);
+}
+
+.tablebody {
+    font-size: 10px;
+}
+
+.studentInfo {
+    width: 769px;
+    margin-top: 10px;
+    float: left;
+}
+
+.studentTableHeader {
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Microsoft YaHei UI";
+    background-color: rgba(32, 102, 154, 0.8);
+    font-weight: bold;
+    color: white;
+}
+
+.more {
+    float: right;
+}
+
+.studentId {
+    width: 105px;
+    height: 20px;
+}
+
+.studentName {
+    width: 80px;
+    height: 20px;
+}
+
+.studentStatus {
+    width: 63px;
+    height: 20px;
+}
